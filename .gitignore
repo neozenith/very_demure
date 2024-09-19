@@ -134,3 +134,4 @@ requirements*.txt
 
 .make/
 *.mp3
+!samples/*.mp3
