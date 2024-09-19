@@ -22,7 +22,7 @@ JSON_LOG_FORMAT: str = (
 ISO8601_DATE_FORMAT: str = "%Y-%m-%d %H:%M:%S"
 
 ENV_PREFIX = "JOSHPEAK_"
-CLI_ARGS_CONFIG = {"duration": None}
+CLI_ARGS_CONFIG = {"duration": None, "voice": "Matthew", "engine": "neural"}
 
 
 def __argparse_factory(config: dict[str, Any]) -> argparse.ArgumentParser:

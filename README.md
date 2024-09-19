@@ -25,10 +25,7 @@ but could I have a more on-demand model? _**Turns out, yes I can.**_
 
 - get OpenAI to generate a guided mindfulness transcript
 - get AWS Polly to use the text-to-speech to synthesize the audio.
-
-## TODO
-
-- Add slower cadence and pauses. Investigate [SSML](https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html)?
+- Add slower cadence and pauses. Leverage [SSML](https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html)
 
 # Quickstart
 
@@ -45,3 +42,23 @@ open output.mp3
 # Samples
 
 Checkout an example transcript and MP3 in the [`samples/`](samples/) folder
+
+> WIP: Testing to see if HTML `<audio>` tags work in Github Markdown
+
+<figure>
+  <figcaption>Amy</figcaption>
+  <audio controls src="samples/neural-Amy.mp3"></audio>
+  <a href="samples/neural-Amy.mp3"> Download audio </a>
+</figure>
+
+<figure>
+  <figcaption>Ruth</figcaption>
+  <audio controls src="samples/neural-Ruth.mp3"></audio>
+  <a href="samples/neural-Ruth.mp3"> Download audio </a>
+</figure>
+
+<figure>
+  <figcaption>Matthew</figcaption>
+  <audio controls src="samples/neural-Matthew.mp3"></audio>
+  <a href="samples/neural-Matthew.mp3"> Download audio </a>
+</figure>
