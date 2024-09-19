@@ -133,3 +133,4 @@ requirements*.txt
 .*_cache
 
 .make/
+*.mp3
