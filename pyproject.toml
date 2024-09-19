@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools >= 61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[project]
+name = "very_demure"
+version = "1.0.0"
+description = "POC to see if I can GenAI some midnfulness"
+authors = [{name = "Josh Peak", email = "joshpeak05@gmail.com"}]
+readme = "README.md"
+license = {text = "MIT License"}
+requires-python = ">=3.10"
+
+dependencies = [
+    "boto3",
+    "openai",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pytest-xdist",
+    "pre-commit",
+    "ruff",
+    "isort",
+    "mypy",
+    "md-toc",
+    "watchdog",
+    "testcontainers",
+    "aiohttp",
+    "boto3-stubs[boto3]"
+]
+
+
+[project.urls]
+homepage = "https://github.com/neozenith/python-onboarding-guide"
+repository = "https://github.com/neozenith/python-onboarding-guide"
+documentation = "https://github.com/neozenith/python-onboarding-guide"
+
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",# pycodestyle
+    "F", # Pyflakes
+    "UP", # pyupgrade
+    "B", # flake8-bugbear
+    "SIM", # flake8-simplify
+    "I", # isort
+    "PTH", # falek8-use-pathlib 
+    "TCH", # flake8-type-checking
+    # "S", # flake8-bandit
+    "C90", #mccabe
+]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 5.
+max-complexity = 10
+
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+import_heading_stdlib = "Standard Library"
+import_heading_firstparty = "Our Libraries"
+import_heading_thirdparty = "Third Party"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-s -vvv --color=yes"
+
+[tool.coverage.run]
+omit = ["tests/*", "**/__init__.py", "tasks.py"]
+branch = true
+
+[tool.mypy]
+pretty = true
+show_error_codes = true
+show_column_numbers = true
+show_error_context = true
+exclude = [
+  'tests/',
+  '.venv/',
+  'docs/'
+]
+follow_imports = 'silent'
+ignore_missing_imports = true
+
+# Work your way up to these:
+disallow_incomplete_defs = true
+# disallow_untyped_defs = true 
+# disallow_untyped_calls = true
+# strict = true
