@@ -17,5 +17,10 @@ The actual goal is to:
 
 ```sh
 make dev
-make run
+
+# Generate script for a "10 minute" session.
+# TODO: Get the generated audio to actually pause with silence when cued.
+python3 -m very_demure --duration 10
+
+open output.mp3
 ```
