@@ -7,9 +7,28 @@
 </div>
 The name is a play on a current TikTok trend.
 
-The actual goal is to:
-- get OpenAI to generate a guided mindfulness track
+# Motivation
+
+After listening to this [podcast](https://brenebrown.com/podcast/finding-focus-and-owning-your-attention/) 
+where Brené Brown interviews Dr Amishi Jha to dive into the distinction between _Focus_, _Attention_ and _Memory_, 
+I have a renewed interest in my own mindfulness practices.
+
+Dr. Gabor Mate writes in his book [Scattered Minds](https://drgabormate.com/book/scattered-minds/) about the importance 
+of a mindfulness practice to help those with ADHD to manage and even reverse some of the attention deficit traits.
+
+After trying a few different "mindfulness" apps, I wasn't convinced of their value with subscription pricing 
+but could I have a more on-demand model? _**Turns out, yes I can.**_
+
+# Roadmap
+
+## Done
+
+- get OpenAI to generate a guided mindfulness transcript
 - get AWS Polly to use the text-to-speech to synthesize the audio.
+
+## TODO
+
+- Add slower cadence and pauses. Investigate [SSML](https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html)?
 
 # Quickstart
 
