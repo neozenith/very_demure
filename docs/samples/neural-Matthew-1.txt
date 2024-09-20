@@ -1,0 +1,26 @@
+
+<speak>
+<prosody rate="slow">
+Welcome to this one-minute guided mindfulness meditation.
+
+Take a moment to find a comfortable position, either sitting or lying down. Relax your shoulders and close your eyes if that feels comfortable for you.
+
+Take a deep breath in through your nose, filling your lungs completely. <break time="3s" /> 
+
+Now slowly exhale through your mouth, letting go of any tension. <break time="3s" />
+
+Feel the air entering your nostrils, traveling down to your lungs, and nourishing your body. <break time="10s" /><break time="10s" /><break time="10s" />
+
+Notice the rise and fall of your chest with each breath you take. <break time="10s" /><break time="10s" /><break time="10s" /><break time="10s" /><break time="10s" /><break time="10s" />
+
+Allow your mind to settle, letting go of any worries or thoughts. <break time="10s" /><break time="10s" /><break time="10s" />
+
+Feel the calm and stillness growing inside you. <break time="10s" /><break time="10s" /><break time="10s" />
+
+When you are ready, gently bring your attention back to the present moment. <break time="3s" />
+
+Open your eyes, take another deep breath in, and carry this sense of peace with you throughout your day.
+
+Thank you for meditating with me.
+</prosody>
+</speak>

@@ -115,6 +115,9 @@ run: .make/dev-deps-installed
 	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Ruth --duration 1
 	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Amy --duration 1
 
+serve:
+	.venv/bin/python3 -m http.server -d docs
+
 # ==================== PACKAGING / DEPLOYMENT (CD) ====================
 
 docker-login: 
