@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "boto3typed.boto3-ide",
+        "ms-python.python",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "github.vscode-github-actions",
+        "elagil.pre-commit-helper",
+        "charliermarsh.ruff",
+        "ms-python.mypy-type-checker"
+    ]
+}

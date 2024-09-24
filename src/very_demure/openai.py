@@ -1,5 +1,10 @@
+# Standard Library
+import logging
+
 # Third Party
 from openai import OpenAI
+
+logger = logging.getLogger(__name__)
 
 
 def generate_mindfulness_script(client: OpenAI, duration: str = "10", model="gpt-4o", engine="neural"):
@@ -11,13 +16,11 @@ def generate_mindfulness_script(client: OpenAI, duration: str = "10", model="gpt
             Do not include <voice> or <prsody> SSML tags as they are not yet supported by the generative voices.
         """
 
-    completion = client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {
-                "role": "user",
-                "content": f"""
+    messages = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {
+            "role": "user",
+            "content": f"""
                 Write the text for a guided mindfulness meditation session which should last {duration} minutes.
                 This output script is being passed into AWS Polly to be synthesised into speech.
                 
@@ -39,8 +42,12 @@ def generate_mindfulness_script(client: OpenAI, duration: str = "10", model="gpt
                 The start of script and end of script markers should be '[SCRIPT]' 
                 but still include the SSML <speak> markers inside them.
                 """,
-            },
-        ],
+        },
+    ]
+
+    completion = client.chat.completions.create(
+        model=model,
+        messages=messages,
     )
 
     return completion.choices[0].message

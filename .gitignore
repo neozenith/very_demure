@@ -135,5 +135,5 @@ requirements*.txt
 .make/
 *.mp3
 !docs/samples/*.mp3
-
+output/
 **/.DS_Store

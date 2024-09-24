@@ -22,7 +22,18 @@ JSON_LOG_FORMAT: str = (
 ISO8601_DATE_FORMAT: str = "%Y-%m-%d %H:%M:%S"
 
 ENV_PREFIX = "JOSHPEAK_"
-CLI_ARGS_CONFIG = {"duration": None, "voice": "Matthew", "engine": "neural"}
+CLI_ARGS_CONFIG = {
+    "duration": None,
+    "voice": "Matthew",
+    "engine": "neural",
+    "output-location": "./output/",
+    "provider": "bedrock",
+    "model": "titan",
+}
+
+
+def sanitise_model_name(model_name: str) -> str:
+    return model_name.replace(":", "_").replace(".", "_").replace("-", "_")
 
 
 def __argparse_factory(config: dict[str, Any]) -> argparse.ArgumentParser:
