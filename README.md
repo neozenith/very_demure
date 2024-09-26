@@ -24,10 +24,10 @@ but could I have a more on-demand model? _**Turns out, yes I can.**_
 <details>
     <summary><i>Click this arrow for detailed diagram</i>
         <h4>Architecture Diagram: Simple</h4>
-        <img src="cdk/docs/diagrams/diagram-simple.png" alt="Architecture Diagram: Simple" width="100%" />
+        <img src="infra/docs/diagrams/diagram-simple.png" alt="Architecture Diagram: Simple" width="50%" />
     </summary>
     <h4>Architecture Diagram: Detailed</h4>
-    <img src="cdk/docs/diagrams/diagram-detailed.png" alt="Architecture Diagram: Detailed" width="100%" />
+    <img src="infra/docs/diagrams/diagram-detailed.png" alt="Architecture Diagram: Detailed" width="50%" />
 </details>
 
 # Roadmap
