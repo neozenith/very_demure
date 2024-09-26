@@ -46,7 +46,6 @@ init: .venv/bin/python3 requirements%.txt
 	[ ! -d ".venv" ] && python3 -m venv .venv || echo ".venv already setup"
 	.venv/bin/python3 -m pip install -qq --upgrade pip uv build wheel pre-commit
 	.venv/bin/pre-commit install
-	
 
 # Ensure the lock files get generated based on changes to pyproject.toml
 lock: requirements%.txt
@@ -77,10 +76,9 @@ dev: .make/dev-deps-installed
 	.venv/bin/python3 -m uv pip install \
     	-r requirements-dev-macos.txt \
     	--editable .  # <- the app/pkg itself
+	# If we are updating tools update aws-cdk too
+	npm install -g aws-cdk
 	@touch $@
-
-
-
 
 # ==================== QUALITY ASSURANCE (CI) ====================
 
@@ -90,7 +88,7 @@ fix: .make/dev-deps-installed
 	.venv/bin/isort src/ tests/ scripts
 
 	# Lint Fix
-	.venv/bin/ruff check . --fix
+	.venv/bin/ruff check src/ --fix
 
 	# Precommit validations checks
 	.venv/bin/pre-commit run
@@ -103,6 +101,9 @@ typecheck: .make/dev-deps-installed
 
 docs: .make/dev-deps-installed
 	.venv/bin/md_toc --in-place github --header-levels 4 README.md guides/*.md
+	npx cdk-dia --rendering "graphviz-png" --target docs/diagrams/diagram-simple.png --collapse true --collapse-double-clusters true
+	npx cdk-dia --rendering "graphviz-png" --target docs/diagrams/diagram-detailed.png --collapse false --collapse-double-clusters false
+	npx cdk-dia --rendering "cytoscape-html" --target docs/diagrams/ --collapse false --collapse-double-clusters false    
 
 test: .make/dev-deps-installed
 	.venv/bin/python3 -m pytest
@@ -111,7 +112,8 @@ wheel:
 	.venv/bin/python3 -m build --wheel --installer uv
 
 run: .make/dev-deps-installed
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 1
+	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 1 --provider bedrock 
+	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 1 --provider openai --model gpt-4o
 	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Ruth --duration 1
 	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Amy --duration 1
 
@@ -143,6 +145,24 @@ docker-run:
 
 docker-push: docker-build docker-login
 	docker push $(ECR_REPOSITORY):latest
+
+
+# ==================== INFRASTRUCTURE (IaC) ====================
+
+cdk-diff:
+	cdk diff
+
+cdk-synth:
+	cdk synth
+
+cdk-deploy: cdk-synth docs
+	cdk deploy
+
+cdk-outputs:
+	aws cloudformation describe-stacks > cdk.out/cdk-outputs-$(AWS_PROFILE).json
+
+cdk-destroy:
+	cdk destroy
 
 # ==================== TEARDOWN ====================
 clean:

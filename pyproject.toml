@@ -21,6 +21,7 @@ requires-python = ">=3.10"
 dependencies = [
     "boto3",
     "openai",
+    "ssml-builder",
     "python-dotenv",
     "boto3-stubs[polly,bedrock-runtime,boto3]"
     
@@ -35,18 +36,18 @@ dev = [
     "ruff",
     "isort",
     "mypy",
+    "boto3-stubs[boto3]",
     "md-toc",
     "watchdog",
     "testcontainers",
-    "aiohttp",
-    "boto3-stubs[boto3]"
+    "aiohttp",    
 ]
 
 
 [project.urls]
-homepage = "https://github.com/neozenith/python-onboarding-guide"
-repository = "https://github.com/neozenith/python-onboarding-guide"
-documentation = "https://github.com/neozenith/python-onboarding-guide"
+homepage = "https://github.com/neozenith/very_demure"
+repository = "https://github.com/neozenith/very_demure"
+documentation = "https://github.com/neozenith/very_demure"
 
 
 [tool.black]
@@ -92,7 +93,7 @@ import_heading_thirdparty = "Third Party"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-s -vvv --color=yes"
+addopts = "-s -vvv --color=yes --ignore=cdk"
 
 [tool.coverage.run]
 omit = ["tests/*", "**/__init__.py", "tasks.py"]
