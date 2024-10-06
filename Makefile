@@ -112,13 +112,13 @@ wheel:
 	.venv/bin/python3 -m build --wheel --installer uv
 
 run: .make/dev-deps-installed
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 1 --provider bedrock 
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 1 --provider openai --model gpt-4o
+	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider bedrock 
+	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider openai --model gpt-4o
 	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Ruth --duration 1
 	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Amy --duration 1
 
 serve:
-	.venv/bin/python3 -m http.server -d docs
+	.venv/bin/python3 -m http.server -d dist
 
 # ==================== PACKAGING / DEPLOYMENT (CD) ====================
 

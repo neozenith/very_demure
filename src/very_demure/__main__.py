@@ -58,9 +58,12 @@ def main() -> None:
 
     # Prepare file outputs
     model_name = sanitise_model_name(llm_config.model_id)
-    output_name = f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.voice}-{ss_conf.duration_minutes}"
+    script_output_name = f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}"
+    audio_output_name = (
+        f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{ss_conf.voice}"
+    )
 
-    output_location = cli_args.get("output_location", "./output/")
+    output_location = cli_args.get("output_location", "./dist/assets/")
     output_location_path = Path(output_location)
     logger.info(output_location_path)
     output_location_path.parent.mkdir(parents=True, exist_ok=True)
@@ -85,13 +88,17 @@ def main() -> None:
     logger.info(exact_ssml_script)
 
     # Save a copy of the transcript
-    transcript_file = output_location_path / f"{output_name}.ssml.xml"
+    transcript_file = output_location_path / f"{script_output_name}.ssml.xml"
     transcript_file.write_text(exact_ssml_script)
 
-    output_audio_path = output_location_path / f"{output_name}.mp3"
-    synthesize_speech(
-        exact_ssml_script, speech_synth_config=ss_conf, output_file=output_audio_path, polly_client=polly_client
-    )
+    # Synth all voices
+    for voice in ["Amy", "Matthew", "Ruth"]:
+        audio_output_name = f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{voice}"
+        output_audio_path = output_location_path / f"{audio_output_name}.mp3"
+        ss_conf.voice = voice
+        synthesize_speech(
+            exact_ssml_script, speech_synth_config=ss_conf, output_file=output_audio_path, polly_client=polly_client
+        )
 
 
 def graceful_shutdown_handler(e: Exception) -> None:

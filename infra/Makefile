@@ -120,13 +120,13 @@ cdk-synth:
 	cdk synth --profile $(AWS_PROFILE)
 
 cdk-deploy: cdk-synth docs
-	cdk deploy  --profile $(AWS_PROFILE)
+	cdk deploy  --profile $(AWS_PROFILE) --force --all
 
 cdk-outputs:
 	aws cloudformation describe-stacks > cdk.out/cdk-outputs-$(AWS_PROFILE).json
 
 cdk-destroy:
-	cdk destroy  --profile $(AWS_PROFILE)
+	cdk destroy  --profile $(AWS_PROFILE) --force  --all
 
 # ==================== TEARDOWN ====================
 clean:
@@ -136,3 +136,4 @@ clean:
 	rm -rfv requirements*.txt
 	rm -rfv src/${APP_NAME_SNAKE}.egg-info
 	rm -rfv dist/
+	mkdir -p .make

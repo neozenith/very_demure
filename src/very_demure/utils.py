@@ -29,7 +29,7 @@ CLI_ARGS_CONFIG = {
     "output-location": "./output/",
     "provider": "bedrock",
     "model": "amazon.titan-text-premier-v1:0",
-    "speed": "x-slow",
+    "speed": "slow",
 }
 
 

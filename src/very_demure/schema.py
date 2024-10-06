@@ -11,7 +11,7 @@ VALID_VOICES = ["Matthew", "Amy", "Ruth"]
 class SpeechSynthConfig:
     engine: str = "neural"
     voice: str = "Matthew"
-    voice_speed: str = "x-slow"
+    voice_speed: str = "slow"
     duration_minutes: str = "1"
 
     def __post_init__(self):

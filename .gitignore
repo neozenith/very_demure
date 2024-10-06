@@ -137,3 +137,5 @@ requirements*.txt
 !docs/samples/*.mp3
 output/
 **/.DS_Store
+dist/
+!infra/docs/diagrams/diagram-*.png

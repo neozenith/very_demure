@@ -149,6 +149,5 @@ requirements*.txt
 output/
 **/.DS_Store
 
-!docs/diagrams/diagram-*.png
-docs/diagrams/
-
+docs/diagrams/**/*
+!docs/diagrams/**/diagram*.png
