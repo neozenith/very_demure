@@ -19,6 +19,17 @@ of a mindfulness practice to help those with ADHD to manage and even reverse som
 After trying a few different "mindfulness" apps, I wasn't convinced of their value with subscription pricing 
 but could I have a more on-demand model? _**Turns out, yes I can.**_
 
+# Architecture
+
+<details>
+    <summary><i>Click this arrow for detailed diagram</i>
+        <h4>Architecture Diagram: Simple</h4>
+        <img src="infra/docs/diagrams/diagram-simple.png" alt="Architecture Diagram: Simple" width="50%" />
+    </summary>
+    <h4>Architecture Diagram: Detailed</h4>
+    <img src="infra/docs/diagrams/diagram-detailed.png" alt="Architecture Diagram: Detailed" width="50%" />
+</details>
+
 # Roadmap
 
 ## Done

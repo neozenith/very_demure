@@ -17,7 +17,7 @@ APP_NAME_SNAKE=$(subst -,_,$(APP_NAME))
 
 AWS_ACCOUNT_ID=
 AWS_PROFILE=
-include .env
+include ../.env
 
 AWS_ECR_REGION=ap-southeast-2
 ECR_REGISTRY=$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_ECR_REGION).amazonaws.com
@@ -100,10 +100,10 @@ typecheck: .make/dev-deps-installed
 	.venv/bin/mypy src
 
 docs: .make/dev-deps-installed
-	.venv/bin/md_toc --in-place github --header-levels 4 README.md guides/*.md
-	npx cdk-dia --rendering "graphviz-png" --target infra/docs/diagrams/diagram-simple.png --collapse true --collapse-double-clusters true
-	npx cdk-dia --rendering "graphviz-png" --target infra/docs/diagrams/diagram-detailed.png --collapse false --collapse-double-clusters false
-	npx cdk-dia --rendering "cytoscape-html" --target infra/docs/diagrams/ --collapse false --collapse-double-clusters false    
+	.venv/bin/md_toc --in-place github --header-levels 4 README.md
+	npx cdk-dia --rendering "graphviz-png" --target docs/diagrams/diagram-simple.png --collapse true --collapse-double-clusters true
+	npx cdk-dia --rendering "graphviz-png" --target docs/diagrams/diagram-detailed.png --collapse false --collapse-double-clusters false
+	npx cdk-dia --rendering "cytoscape-html" --target docs/diagrams/ --collapse false --collapse-double-clusters false    
 
 test: .make/dev-deps-installed
 	.venv/bin/python3 -m pytest
@@ -111,58 +111,22 @@ test: .make/dev-deps-installed
 wheel:
 	.venv/bin/python3 -m build --wheel --installer uv
 
-run: .make/dev-deps-installed
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider bedrock 
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider openai --model gpt-4o
-	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Ruth --duration 1
-	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Amy --duration 1
-
-serve:
-	.venv/bin/python3 -m http.server -d dist
-
-# ==================== PACKAGING / DEPLOYMENT (CD) ====================
-
-docker-login: 
-	aws --profile $(AWS_PROFILE) ecr get-login-password --region $(AWS_ECR_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_ECR_REGION).amazonaws.com
-
-docker-clean:
-	docker buildx prune -a -f
-	docker image prune -f
-
-docker-build: 
-	docker buildx build \
-		--build-arg TARGET_PYTHON_VERSION=$(DOCKER_PYTHON_BASE) \
-		--build-arg PROJECT_NAME=$(APP_NAME_SNAKE) \
-		--progress plain \
-		-t $(APP_NAME_KEBAB):latest \
-		-t $(ECR_REPOSITORY):latest \
-		-f containers/docker/Dockerfile \
-		.
-	docker tag $(APP_NAME_KEBAB):latest $(ECR_REPOSITORY):latest
-
-docker-run:
-	docker run -i -t --env-file .env $(APP_NAME_KEBAB)
-
-docker-push: docker-build docker-login
-	docker push $(ECR_REPOSITORY):latest
-
-
 # ==================== INFRASTRUCTURE (IaC) ====================
 
 cdk-diff:
-	cdk diff
+	cdk diff --profile $(AWS_PROFILE)
 
 cdk-synth:
-	cdk synth
+	cdk synth --profile $(AWS_PROFILE)
 
 cdk-deploy: cdk-synth docs
-	cdk deploy
+	cdk deploy  --profile $(AWS_PROFILE) --force --all
 
 cdk-outputs:
 	aws cloudformation describe-stacks > cdk.out/cdk-outputs-$(AWS_PROFILE).json
 
 cdk-destroy:
-	cdk destroy
+	cdk destroy  --profile $(AWS_PROFILE) --force  --all
 
 # ==================== TEARDOWN ====================
 clean:
@@ -172,6 +136,4 @@ clean:
 	rm -rfv requirements*.txt
 	rm -rfv src/${APP_NAME_SNAKE}.egg-info
 	rm -rfv dist/
-	docker image prune -f
-	docker buildx prune -f
-	
+	mkdir -p .make

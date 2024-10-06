@@ -1,3 +1,14 @@
+*.swp
+package-lock.json
+__pycache__
+.pytest_cache
+.venv
+*.egg-info
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -137,5 +148,6 @@ requirements*.txt
 !docs/samples/*.mp3
 output/
 **/.DS_Store
-dist/
-!infra/docs/diagrams/diagram-*.png
+
+docs/diagrams/**/*
+!docs/diagrams/**/diagram*.png

@@ -21,14 +21,15 @@ JSON_LOG_FORMAT: str = (
 )
 ISO8601_DATE_FORMAT: str = "%Y-%m-%d %H:%M:%S"
 
-ENV_PREFIX = "JOSHPEAK_"
+ENV_PREFIX = "VERYDEMURE_"
 CLI_ARGS_CONFIG = {
     "duration": None,
     "voice": "Matthew",
     "engine": "neural",
     "output-location": "./output/",
     "provider": "bedrock",
-    "model": "titan",
+    "model": "amazon.titan-text-premier-v1:0",
+    "speed": "slow",
 }
 
 

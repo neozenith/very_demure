@@ -10,7 +10,7 @@ where = ["src"]
 
 
 [project]
-name = "very_demure"
+name = "very-demure-infra"
 version = "1.0.0"
 description = "POC to see if I can GenAI some midnfulness"
 authors = [{name = "Josh Peak", email = "joshpeak05@gmail.com"}]
@@ -19,12 +19,8 @@ license = {text = "MIT License"}
 requires-python = ">=3.10"
 
 dependencies = [
-    "boto3",
-    "openai",
-    "ssml-builder",
-    "python-dotenv",
-    "boto3-stubs[polly,bedrock-runtime,boto3]"
-    
+    "aws-cdk-lib",
+    "constructs",    
 ]
 
 [project.optional-dependencies]
@@ -38,7 +34,7 @@ dev = [
     "mypy",
     "boto3-stubs[boto3]",
     "md-toc",
-    "watchdog"
+    "watchdog"   
 ]
 
 
