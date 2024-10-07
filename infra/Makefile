@@ -48,7 +48,9 @@ init: .venv/bin/python3 requirements%.txt
 	.venv/bin/pre-commit install
 
 # Ensure the lock files get generated based on changes to pyproject.toml
-lock: requirements%.txt
+lock: requirements%.txt uv.lock
+uv.lock: pyproject.toml .venv/bin/python3
+	.venv/bin/python3 -m uv lock
 requirements%.txt: pyproject.toml .venv/bin/python3
 # Prod only deps
 	.venv/bin/python3 -m uv pip compile --no-cache --refresh --generate-hashes --upgrade  -o requirements-macos.txt pyproject.toml
