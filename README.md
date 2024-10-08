@@ -37,6 +37,21 @@ but could I have a more on-demand model? _**Turns out, yes I can.**_
 - get OpenAI to generate a guided mindfulness transcript
 - get AWS Polly to use the text-to-speech to synthesize the audio.
 - Add slower cadence and pauses. Leverage [SSML](https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html)
+- Add AWS Bedrock intregration to leverage their models
+- Deploy to CloudFront with security best practices (OAC)
+- Deploy under custom domain name with SSL Certificate.
+
+## TODO
+
+- Port simple HTML/CSS to React SPA
+- Add Lambda@Edge and Cognito authenticated areas (Google SSO as MVP)
+- Add API Gateway + Lambda API endpoint
+    - Simple HelloWorld
+    - List user protected content
+    - Allow user to generate new content
+- Consolidate the API Gateway Endpoint and the CloudFront static site under the same url but use Lambda@Edge to redirect /api/ requests to API Gateway instead
+- Integrate Stripe or some other payment portal provider to make generating on-demand new audio tracks as a pay-per-generate option.
+
 
 # Quickstart
 

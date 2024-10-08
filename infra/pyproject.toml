@@ -20,7 +20,8 @@ requires-python = ">=3.10"
 
 dependencies = [
     "aws-cdk-lib",
-    "constructs",    
+    "constructs",
+    "python-dotenv"   
 ]
 
 [project.optional-dependencies]
