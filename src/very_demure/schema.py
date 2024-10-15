@@ -13,6 +13,7 @@ class SpeechSynthConfig:
     voice: str = "Matthew"
     voice_speed: str = "slow"
     duration_minutes: str = "1"
+    flavour: str = "sleepy"  # flavour = sleepy|morning|everyday
 
     def __post_init__(self):
         if self.voice not in VALID_VOICES:

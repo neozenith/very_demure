@@ -139,3 +139,8 @@ clean:
 	rm -rfv src/${APP_NAME_SNAKE}.egg-info
 	rm -rfv dist/
 	mkdir -p .make
+
+help: # List Makefile targets with hash-comment descriptions
+	awk 'BEGIN {FS = ":.*?# "} /^[ a-zA-Z0-9_-]+:.* # / {printf "\033[36m%-41s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
+
+.SILENT: help

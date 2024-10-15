@@ -30,6 +30,7 @@ CLI_ARGS_CONFIG = {
     "provider": "bedrock",
     "model": "amazon.titan-text-premier-v1:0",
     "speed": "slow",
+    "flavour": "sleepy",
 }
 
 

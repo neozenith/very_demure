@@ -110,12 +110,15 @@ docs: .make/dev-deps-installed
 test: .make/dev-deps-installed
 	.venv/bin/python3 -m pytest
 
+ci: fix typecheck test
+
 wheel:
 	.venv/bin/python3 -m build --wheel --installer uv
 
 run: .make/dev-deps-installed
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider bedrock 
-	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider openai --model gpt-4o
+	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider bedrock 
+	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider openai --model gpt-4o
+	.venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Matthew --duration 10 --provider openai --model o1-preview --flavour morning
 	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Ruth --duration 1
 	# .venv/bin/python3 -m ${APP_NAME_SNAKE} --voice Amy --duration 1
 

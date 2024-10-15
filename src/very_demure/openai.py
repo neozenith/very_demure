@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 
 
 def generate_mindfulness_script(
-    client: OpenAI, model="gpt-4o", speech_synth_config: SpeechSynthConfig = DEFAULT_SPEECH_CONFIG
-):
+    client: OpenAI, model: str = "gpt-4o", speech_synth_config: SpeechSynthConfig = DEFAULT_SPEECH_CONFIG
+) -> str:
     """Use the OpenAI models to generate a guided mindfulness script."""
     prompt = generate_prompt(speech_synth_config=speech_synth_config)
 

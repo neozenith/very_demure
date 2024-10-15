@@ -54,14 +54,15 @@ def main() -> None:
         voice=cli_args.get("voice", "Matthew"),  # voice_id = "Amy|Ruth|Matthew"
         voice_speed=cli_args.get("speed", "x-slow"),
         duration_minutes=cli_args.get("duration", "1"),
+        flavour=cli_args.get("flavour", "sleepy"),  # flavour = sleepy|morning|everyday
     )
 
     # Prepare file outputs
     model_name = sanitise_model_name(llm_config.model_id)
-    script_output_name = f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}"
-    audio_output_name = (
-        f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{ss_conf.voice}"
+    script_output_name = (
+        f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{ss_conf.flavour}"
     )
+    audio_output_name = f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{ss_conf.voice}-{ss_conf.flavour}"  # noqa: E501
 
     output_location = cli_args.get("output_location", "./dist/assets/")
     output_location_path = Path(output_location)
@@ -93,7 +94,9 @@ def main() -> None:
 
     # Synth all voices
     for voice in ["Amy", "Matthew", "Ruth"]:
-        audio_output_name = f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{voice}"
+        audio_output_name = (
+            f"{llm_config.provider}-{model_name}-{ss_conf.engine}-{ss_conf.duration_minutes}-{voice}-{ss_conf.flavour}"
+        )
         output_audio_path = output_location_path / f"{audio_output_name}.mp3"
         ss_conf.voice = voice
         synthesize_speech(
